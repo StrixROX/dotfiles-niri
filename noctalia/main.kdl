@@ -1,0 +1,4 @@
+include "binds.kdl"
+include "misc.kdl"
+include "startup.kdl"
+include "window_rules.kdl"

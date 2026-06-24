@@ -1,0 +1,17 @@
+input {
+    keyboard {
+        // Enable numlock on startup, omitting this setting disables it.
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        //dwt // disable when typing
+    }
+
+    mouse {
+        accel-speed 0.0
+        accel-profile "flat"
+    }
+}

@@ -1,0 +1,11 @@
+// include "dms/main.kdl"
+include "noctalia/main.kdl"
+
+include "binds.kdl"
+include "input.kdl"
+include "layer_rules.kdl"
+include "layout.kdl"
+include "misc.kdl"
+include "startup.kdl"
+include "theme.kdl"
+include "window_rules.kdl"

@@ -1,0 +1,43 @@
+// Global configs for theming related stuff like blur and stuff
+
+blur {
+    passes 2
+    noise 0.08
+}
+
+// Global window rules
+window-rule {
+    geometry-corner-radius 8
+    draw-border-with-background false
+    clip-to-geometry true
+
+    opacity 0.93
+
+    background-effect {
+        blur true
+    }
+
+    popups {
+        // Matches the default libadwaita pop-up corner radius.
+        geometry-corner-radius 8
+
+        opacity 0.85
+
+        background-effect {
+            blur true
+        }
+    }
+}
+
+window-rule {
+    match is-floating=true
+
+    shadow {
+        on
+        softness 50
+        spread 2
+        offset x=0 y=0
+        draw-behind-window false
+        color "#00000064"
+    }
+}

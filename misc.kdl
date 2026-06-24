@@ -1,0 +1,19 @@
+config-notification { disable-failed; }
+
+hotkey-overlay { skip-at-startup; }
+
+prefer-no-csd
+
+gestures {
+    hot-corners { off; }
+}
+
+screenshot-path "~/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+}
+
+debug {
+    render-drm-device "/dev/dri/renderD129" // the integrated GPU
+}

@@ -1,0 +1,122 @@
+// workspace-agnostic rules
+window-rule {
+    match app-id="^PPSSPPSDL$"
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="^microsoft-edge$"
+    open-maximized true
+}
+
+window-rule {
+    match app-id="^steam$"
+    open-maximized true
+}
+
+window-rule {
+    match app-id="KeePassXC"
+    open-floating true
+    default-column-width { fixed 700; }
+    default-window-height { fixed 600; }
+}
+
+window-rule {
+    match app-id=r"pavucontrol"
+    max-height 480
+    open-floating true
+    default-floating-position x=0 y=300 relative-to="top"
+}
+
+window-rule {
+    match app-id=r"^steam$" title=r"^notificationtoasts_\d+_desktop$"
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+}
+
+window-rule {
+    match app-id="Nextcloud"
+    open-floating true
+    default-column-width { proportion 0.33; }
+    default-window-height { proportion 0.67; }
+    default-floating-position x=8 y=8 relative-to="top-right"
+}
+
+window-rule {
+    match title="Picture in picture" // browser PiPs
+
+    open-floating true
+    open-focused false
+
+    min-width 400
+    min-height 225
+    default-column-width { proportion 0.25; }
+    default-window-height { proportion 0.25; }
+    default-floating-position x=24 y=24 relative-to="bottom-right"
+
+    focus-ring { off; }
+    shadow {
+        on
+        softness 40
+        spread 2
+        offset x=0 y=0
+        draw-behind-window false
+        color "#00000064"
+    }
+}
+
+
+
+// top workspace (apps-bg)
+window-rule {
+    match title="WhatsApp" // web app
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
+window-rule {
+    match title="YouTube Music" // web app
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
+window-rule {
+    match title="Gmail" // web app
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
+
+
+// middle workspace (default)
+window-rule {
+    match app-id="^microsoft-edge$"
+    open-maximized true
+    open-on-workspace "default"
+}
+
+
+
+// bottom workspace (apps-other)
+window-rule {
+    match app-id="^microsoft-edge$" title="InPrivate"
+    open-focused true
+    open-on-workspace "apps-other"
+}
+
+window-rule {
+    match title="onshape" // web app
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-other"
+}
+
+window-rule {
+    match app-id="^BambuStudio$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-other"
+}

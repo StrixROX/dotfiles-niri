@@ -1,0 +1,92 @@
+binds {
+    // === System & Overview ===
+    Mod+D hotkey-overlay-title="Toggle overview" repeat=false { toggle-overview; }
+    Mod+Shift+Slash hotkey-overlay-title="Display keyboard shortcuts" { show-hotkey-overlay; }
+    Mod+Shift+E hotkey-overlay-title="Exit niri" repeat=false { quit; }
+
+    // === Application Launchers ===
+    Mod+E hotkey-overlay-title="Open File Explorer: nautilus" { spawn "nautilus" "--new-window"; }
+    Mod+T hotkey-overlay-title="Open Terminal: kitty" { spawn "kitty"; }
+
+    // === Window Management ===
+    Mod+Q hotkey-overlay-title="Close window" repeat=false { close-window; }
+    Mod+F hotkey-overlay-title="Maximize window width" { maximize-column; }
+    Mod+Shift+F hotkey-overlay-title="Fullscreen window" { fullscreen-window; }
+    Mod+V hotkey-overlay-title="Toggle floating window" { toggle-window-floating; }
+    Mod+Shift+V hotkey-overlay-title="Switch focus b/w floating and tiling windows" { switch-focus-between-floating-and-tiling; }
+    Mod+W hotkey-overlay-title="Toggle column tabs" { toggle-column-tabbed-display; }
+
+     // === Focus Navigation ===
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+
+    // === Window Movement ===
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+
+    // === Monitor Navigation ===
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    //Mod+Ctrl+Down  { focus-monitor-down; }
+    //Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+
+    // === Move to Monitor ===
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+    // === Workspace Navigation ===
+    Mod+I              { focus-workspace-down; }
+    Mod+U              { focus-workspace-up; }
+    Mod+Ctrl+Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+U         { move-column-to-workspace-down; }
+    Mod+Ctrl+I         { move-column-to-workspace-up; }
+
+    // === Mouse Wheel Navigation ===
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Ctrl+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
+
+    Mod+Shift+WheelScrollDown      { focus-column-right; }
+    Mod+Shift+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    // === Column Management ===
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Period { expel-window-from-column; }
+
+    // === Sizing & Layout ===
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+C { center-column; }
+    Mod+Ctrl+C { center-visible-columns; }
+
+    // === Manual Sizing ===
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // === Screenshots ===
+    XF86Launch1 { screenshot; }
+    Ctrl+XF86Launch1 { screenshot-screen; }
+    Alt+XF86Launch1 { screenshot-window; }
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // === System Controls ===
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+P { power-off-monitors; }
+}

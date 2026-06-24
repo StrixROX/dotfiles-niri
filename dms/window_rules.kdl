@@ -1,0 +1,6 @@
+window-rule {
+	match title="Settings"
+	match app-id="^org.quickshell$"
+
+	open-floating true
+}

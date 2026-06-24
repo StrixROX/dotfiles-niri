@@ -1,0 +1,42 @@
+layout {
+    // empty-workspace-above-first
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    background-color "transparent"
+
+    gaps 8
+
+    border { width 1; }
+
+    focus-ring { width 1; }
+}
+
+overview {
+    workspace-shadow { off; }
+}
+
+// named workspaces
+workspace "apps-bg"
+workspace "default"
+workspace "apps-other"
+
+// focus default workspace at startup
+spawn-at-startup "niri" "msg" "action" "focus-workspace" "default"
+
+
+recent-windows {
+    binds {
+        Alt+Tab         { next-window scope="output"; }
+        Alt+Shift+Tab   { previous-window scope="output"; }
+        Alt+grave       { next-window filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+    }
+}

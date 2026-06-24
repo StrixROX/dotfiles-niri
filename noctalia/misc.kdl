@@ -1,0 +1,4 @@
+debug {
+    // source: https://docs.noctalia.dev/v5/compositor-settings/niri/?section=compositor-settings#compositor-settings
+    honor-xdg-activation-with-invalid-serial
+}

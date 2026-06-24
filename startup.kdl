@@ -1,0 +1,13 @@
+spawn-at-startup "~/wallpaper-controller.sh" "start"
+
+spawn-sh-at-startup "sleep 3 && gtk-launch nextcloud"
+
+spawn-sh-at-startup "sleep 3 && gtk-launch org.keepassxc.KeePassXC.desktop"
+
+spawn-at-startup "niri-empty" "-c" "niri msg action focus-workspace default"
+
+switch-events {
+    lid-open {
+        spawn "~/wallpaper-controller.sh" "start"
+    }
+}
