@@ -5,6 +5,13 @@ window-rule {
 }
 
 window-rule {
+    match app-id="nvim:mynotes.txt"
+    open-floating true
+    default-column-width { fixed 900; }
+    default-window-height { fixed 600; }
+}
+
+window-rule {
     match app-id="^microsoft-edge$"
     open-maximized true
 }

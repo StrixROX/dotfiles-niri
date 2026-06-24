@@ -7,6 +7,7 @@ binds {
     // === Application Launchers ===
     Mod+E hotkey-overlay-title="Open File Explorer: nautilus" { spawn "nautilus" "--new-window"; }
     Mod+T hotkey-overlay-title="Open Terminal: kitty" { spawn "kitty"; }
+    Mod+N hotkey-overlay-title="Open notes document using nvim" { spawn "kitty" "--class" "nvim:mynotes.txt" "nvim" "~/mynotes.txt"; }
 
     // === Window Management ===
     Mod+Q hotkey-overlay-title="Close window" repeat=false { close-window; }
