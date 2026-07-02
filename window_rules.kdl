@@ -115,6 +115,13 @@ window-rule {
 }
 
 window-rule {
+    match title="Figma" // web app
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-other"
+}
+
+window-rule {
     match title="onshape" // web app
     open-maximized true
     open-focused true
