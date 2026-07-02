@@ -119,6 +119,8 @@ window-rule {
     open-maximized true
     open-focused true
     open-on-workspace "apps-other"
+
+    opacity 1.0
 }
 
 window-rule {
