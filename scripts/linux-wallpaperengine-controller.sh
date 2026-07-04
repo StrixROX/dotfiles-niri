@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #
 # Utility script to start/stop linux-wallpaperengine instance
 #
@@ -7,11 +7,12 @@
 #
 
 # declarations
+OUTPUT_NAME="eDP-1"
 WALLPAPER_ID="3339942111"
 
-START_CMD="linux-wallpaperengine --screen-root eDP-1 --scaling fit --disable-mouse --disable-parallax --fullscreen-pause-only-active --silent --no-audio-processing --fps 30 $WALLPAPER_ID"
+START_CMD="linux-wallpaperengine --screen-root $OUTPUT_NAME --scaling fit --disable-mouse --disable-parallax --fullscreen-pause-only-active --silent --no-audio-processing --fps 30 $WALLPAPER_ID"
 
-PID=$(pgrep -f linux-wallpaperengine)
+PID=$(pgrep -fx "./$START_CMD")
 
 if [[ -n "$PID" ]]; then
 	STOP_CMD="kill $PID"
