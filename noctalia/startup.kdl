@@ -1,1 +1,2 @@
 spawn-at-startup "noctalia"
+spawn-sh-at-startup "sleep 2 && ~/.config/niri/myconfigs/noctalia/scripts/smart-auto-hide-bar.sh default"
