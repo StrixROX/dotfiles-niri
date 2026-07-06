@@ -24,7 +24,9 @@
 # Usage:
 #   ./smart-auto-hide-bar.sh <bar_name>
 #
+
 set -uo pipefail
+shopt -s lastpipe
 
 if [[ $# -lt 1 ]]; then
     echo "Usage: $0 <bar_name>" >&2
@@ -70,7 +72,7 @@ evaluate() {
                 show_bar "$bar_name" "$output"
             fi
         fi
-    done < <(niri msg -j workspaces | jq -r '.[] | select(.is_active) | [.output, (.active_window_id != null)] | @tsv')
+    done < <(nc -U -N "$NIRI_SOCKET" <<< '"Workspaces"' | jq -r '.[].Workspaces[] | select(.is_active) | [.output, (.active_window_id != null)] | @tsv')
 }
 
 for dep in jq niri noctalia; do
@@ -83,7 +85,15 @@ done
 # Run once up front so initial state is correct before the first event.
 evaluate
 
-niri msg --json event-stream | while IFS= read -r line; do
+# `niri msg --json event-stream` works, but it re-execs the full niri
+# binary just to hold a socket open and relay bytes -- ~20MB of idle RSS
+# for something that does nothing but wait. The underlying protocol is
+# just: write the JSON request '"EventStream"' on one line, then read
+# JSON events one per line forever. socat does exactly that relay for a
+# fraction of the memory. The first line back is the request's own Reply
+# (e.g. {"Ok":"Handled"}), which is harmless noise -- it doesn't match
+# any case below and falls through to the default (ignored) branch.
+nc -U -N "$NIRI_SOCKET" <<< '"EventStream"' | while IFS= read -r line; do
     [[ -z "$line" ]] && continue
     event_type=$(jq -r 'keys[0]' <<< "$line" 2> /dev/null) || continue
     case "$event_type" in
