@@ -7,6 +7,7 @@ binds {
     Mod+grave { spawn-sh "noctalia msg panel-toggle clipboard"; }
     Mod+X { spawn-sh "noctalia msg panel-toggle session"; }
     Mod+L { spawn-sh "noctalia msg session lock"; }
+    Mod+M { spawn-sh "noctalia msg panel-toggle control-center media"; }
 
     // Audio & Brightness
     XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
