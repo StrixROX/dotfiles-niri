@@ -1,6 +1,6 @@
 binds {
     // === System & Overview ===
-    Mod+D hotkey-overlay-title="Toggle overview" repeat=false { toggle-overview; }
+    Mod+Tab hotkey-overlay-title="Toggle overview" repeat=false { toggle-overview; }
     Mod+Shift+Slash hotkey-overlay-title="Display keyboard shortcuts" { show-hotkey-overlay; }
     Mod+Shift+E hotkey-overlay-title="Exit niri" repeat=false { quit; }
 
