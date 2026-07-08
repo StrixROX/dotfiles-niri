@@ -10,6 +10,11 @@ binds {
     Mod+N hotkey-overlay-title="Open notes document using nvim" { spawn "kitty" "--class" "nvim:mynotes.txt" "nvim" "/home/strixrox/mynotes.txt"; }
 
     // === Window Management ===
+    Mod+1 hotkey-overlay-title="Go to `apps-bg` workspace" { focus-workspace "apps-bg"; }
+    Mod+2 hotkey-overlay-title="Go to `default` workspace" { focus-workspace "default"; }
+    Mod+3 hotkey-overlay-title="Go to `apps-other` workspace" { focus-workspace "apps-other"; }
+
+    // === Window Management ===
     Mod+Q hotkey-overlay-title="Close window" repeat=false { close-window; }
     Mod+F hotkey-overlay-title="Maximize window width" { maximize-column; }
     Mod+Shift+F hotkey-overlay-title="Fullscreen window" { fullscreen-window; }
