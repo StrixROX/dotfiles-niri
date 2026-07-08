@@ -1,13 +1,13 @@
 binds {
     // Core Noctalia binds
-    Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
-    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
-    Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+    Mod+Space hotkey-overlay-title="Open app launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S hotkey-overlay-title="Open control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Comma hotkey-overlay-title="Open settings" { spawn-sh "noctalia msg settings-toggle"; }
 
-    Mod+grave { spawn-sh "noctalia msg panel-toggle clipboard"; }
-    Mod+X { spawn-sh "noctalia msg panel-toggle session"; }
-    Mod+L { spawn-sh "noctalia msg session lock"; }
-    Mod+M { spawn-sh "noctalia msg panel-toggle control-center media"; }
+    Mod+grave hotkey-overlay-title="Open clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+X hotkey-overlay-title="Open power menu" { spawn-sh "noctalia msg panel-toggle session"; }
+    Mod+L hotkey-overlay-title="Lock session" { spawn-sh "noctalia msg session lock"; }
+    Mod+M hotkey-overlay-title="Open media panel" { spawn-sh "noctalia msg panel-toggle control-center media"; }
 
     // Audio & Brightness
     XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
