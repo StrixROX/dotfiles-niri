@@ -1,5 +1,13 @@
 // workspace-agnostic rules
 window-rule {
+    match title="Calculator"
+    open-floating true
+    default-column-width { fixed 360; }
+    default-window-height { fixed 616; }
+    default-floating-position x=250 y=0 relative-to="right"
+}
+
+window-rule {
     match app-id="^PPSSPPSDL$"
     open-fullscreen true
 }
