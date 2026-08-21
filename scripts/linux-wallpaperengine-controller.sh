@@ -10,7 +10,7 @@
 OUTPUT_NAME="eDP-1"
 WALLPAPER_ID="3339942111"
 
-START_CMD="linux-wallpaperengine --screen-root $OUTPUT_NAME --scaling fit --disable-mouse --disable-parallax --fullscreen-pause-only-active --silent --no-audio-processing --fps 30 $WALLPAPER_ID"
+START_CMD="linux-wallpaperengine --screen-root $OUTPUT_NAME --layer background --scaling fit --disable-mouse --disable-parallax --fullscreen-pause-only-active --silent --no-audio-processing --fps 30 $WALLPAPER_ID"
 
 PID=$(pgrep -fx "./$START_CMD")
 
