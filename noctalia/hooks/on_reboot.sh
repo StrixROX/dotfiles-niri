@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+#SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-$SCRIPT_DIR/../../scripts/linux-wallpaperengine-controller.sh stop
+#$SCRIPT_DIR/../../scripts/linux-wallpaperengine-controller.sh stop
+
+pkill linux-wallpaper
