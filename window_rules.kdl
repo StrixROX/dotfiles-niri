@@ -1,5 +1,10 @@
 // workspace-agnostic rules
 window-rule {
+    match app-id="^mpv$"
+    open-maximized true
+}
+
+window-rule {
     match title="^Proton VPN$"
     open-floating true
     default-floating-position x=200 y=0 relative-to="right"
