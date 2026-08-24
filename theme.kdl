@@ -15,6 +15,7 @@ window-rule {
 
     background-effect {
         blur true
+        xray false
     }
 
     popups {
