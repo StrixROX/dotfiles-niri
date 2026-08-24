@@ -1,11 +1,4 @@
-spawn-at-startup "~/.config/niri/myconfigs/scripts/linux-wallpaperengine-controller.sh" "start"
-
 spawn-sh-at-startup "sleep 3 && gtk-launch nextcloud"
 
 spawn-sh-at-startup "sleep 3 && gtk-launch org.keepassxc.KeePassXC.desktop"
 
-switch-events {
-    lid-open {
-        spawn "~/wallpaper-controller.sh" "start"
-    }
-}
