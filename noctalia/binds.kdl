@@ -19,4 +19,7 @@ binds {
     // Media
     XF86AudioPlay { spawn-sh "noctalia msg media toggle"; }
     XF86AudioPause { spawn-sh "noctalia msg media toggle"; }
+    XF86AudioStop { spawn-sh "noctalia msg media stop"; }
+    XF86AudioPrev { spawn-sh "noctalia msg media previous"; }
+    XF86AudioNext { spawn-sh "noctalia msg media next"; }
 }
