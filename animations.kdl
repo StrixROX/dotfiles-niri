@@ -1,0 +1,57 @@
+animations {
+    window-open {
+        duration-ms 300
+        curve "ease-out-cubic"
+
+        custom-shader r"
+            vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+                vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                float p = niri_clamped_progress;
+
+                float x = coords_geo.x;
+                float y = coords_geo.y;
+
+                float offset = (1.0 - p*p) * 0.2; // offset of start of invisible part
+                float width = (1.0 - p) * 0.2; // size of transparent gap
+
+                if ((x + y) * 0.5 >= p && (x + y) * 0.5 < (p + width))
+                    color = vec4(0.0);
+                if ((x + y) * 0.5 >= (p + offset + width))
+                    color = vec4(0.0);
+
+                color *= p;
+
+                return color;
+            }
+        "
+    }
+
+    window-close {
+        duration-ms 300
+        curve "ease-out-cubic"
+
+        custom-shader r"
+            vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                float p = niri_clamped_progress;
+
+                float x = 1.0 - coords_geo.x;
+                float y = coords_geo.y;
+
+                float offset = (1.0 - p*p) * 0.2; // offset of start of invisible part
+                float width = (1.0 - p) * 0.2; // size of transparent gap
+
+                //if ((x + y) * 0.5 >= (p + offset) && (x + y) * 0.5 < (p + offset + width))
+                //    color = vec4(0.0);
+                if ((x + y) * 0.5 <= p)
+                    color = vec4(0.0);
+
+                return color;
+            }
+        "
+    }
+}

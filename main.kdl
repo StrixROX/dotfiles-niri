@@ -1,6 +1,7 @@
 // include "dms/main.kdl"
 include "noctalia/main.kdl"
 
+include "animations.kdl"
 include "binds.kdl"
 include "input.kdl"
 include "layer_rules.kdl"
