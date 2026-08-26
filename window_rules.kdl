@@ -165,3 +165,17 @@ window-rule {
     open-focused true
     open-on-workspace "apps-other"
 }
+
+window-rule {
+    match app-id="^Hermes$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-other"
+}
+
+window-rule {
+    match app-id="^com.anthropic.Claude$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-other"
+}
