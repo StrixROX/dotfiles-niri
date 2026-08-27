@@ -125,6 +125,20 @@ window-rule {
     open-on-workspace "apps-bg"
 }
 
+window-rule {
+    match app-id="^Hermes$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
+window-rule {
+    match app-id="^com.anthropic.Claude$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
 
 
 // middle workspace (default)
@@ -161,20 +175,6 @@ window-rule {
 
 window-rule {
     match app-id="^BambuStudio$"
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-other"
-}
-
-window-rule {
-    match app-id="^Hermes$"
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-other"
-}
-
-window-rule {
-    match app-id="^com.anthropic.Claude$"
     open-maximized true
     open-focused true
     open-on-workspace "apps-other"
