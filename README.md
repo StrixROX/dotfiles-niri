@@ -35,30 +35,30 @@ include "noctalia/main.kdl" // uncommented to enable Noctalia-specifc settings
 
 ```
 myconfigs/
-├── main.kdl                             # imported from main niri config.kdl file to apply all the configs stored here
-├── input.kdl                            # keyboard/mouse/touchpad input settings
-├── binds.kdl                            # global keybindings
-├── layout.kdl                           # window/column layout settings
-├── animations.kdl                       # compositor animation settings
-├── theme.kdl                            # colors/border/focus-ring theming
-├── outputs.kdl                          # per-monitor output settings
-├── layer_rules.kdl                      # rules for layer-shell surfaces (bars, launchers, etc.)
-├── window_rules.kdl                     # per-app window rules
-├── misc.kdl                             # misc settings (hot-corners, screenshot path, env vars)
-├── startup.kdl                          # commands spawned at niri startup
-├── scripts/                             # standalone helper scripts available to binds/startup
-│   └── linux-wallpaperengine-controller.sh
+├── dms/
+│   ├── main.kdl                         # optionally imported from myconfigs/main.kdl to apply DankMaterialShell-specific niri configs
+│   ├── startup.kdl                      # mainly spawns the dms shell process
+│   └── window_rules.kdl                 # window rules for dms's own windows/panels
 ├── noctalia/
-│   ├── main.kdl                         # optionally imported from myconfigs/main.kdl to apply noctalia-specific niri configs
+│   ├── hooks/                           # session hook scripts (shutdown, reboot, lock/unlock)
+│   ├── scripts/                         # noctalia-specific helper scripts
+│   ├── settings/noctalia-config.toml    # backup of noctalia's live settings file
 │   ├── binds.kdl                        # noctalia-specific keybindings
+│   ├── main.kdl                         # optionally imported from myconfigs/main.kdl to apply noctalia-specific niri configs
 │   ├── misc.kdl                         # noctalia-specific misc settings
 │   ├── startup.kdl                      # mainly spawns the noctalia shell process
-│   ├── window_rules.kdl                 # window rules for noctalia's own windows/panels
-│   ├── settings/noctalia-config.toml    # backup of noctalia's live settings file
-│   ├── hooks/                           # session hook scripts (shutdown, reboot, lock/unlock)
-│   └── scripts/                         # noctalia-specific helper scripts
-└── dms/
-    ├── main.kdl                         # optionally imported from myconfigs/main.kdl to apply DankMaterialShell-specific niri configs
-    ├── startup.kdl                      # mainly spawns the dms shell process
-    └── window_rules.kdl                 # window rules for dms's own windows/panels
+│   └── window_rules.kdl                 # window rules for noctalia's own windows/panels
+├── scripts/                             # standalone helper scripts available to binds/startup
+│   └── linux-wallpaperengine-controller.sh
+├── animations.kdl                       # compositor animation settings
+├── binds.kdl                            # global keybindings
+├── input.kdl                            # keyboard/mouse/touchpad input settings
+├── layer_rules.kdl                      # rules for layer-shell surfaces (bars, launchers, etc.)
+├── layout.kdl                           # window/column layout settings
+├── main.kdl                             # imported from main niri config.kdl file to apply all the configs stored here
+├── misc.kdl                             # misc settings (hot-corners, screenshot path, env vars)
+├── outputs.kdl                          # per-monitor output settings
+├── startup.kdl                          # commands spawned at niri startup
+├── theme.kdl                            # colors/border/focus-ring theming
+└── window_rules.kdl                     # per-app window rules
 ```
