@@ -139,6 +139,13 @@ window-rule {
     open-on-workspace "apps-bg"
 }
 
+window-rule {
+    match app-id="^ai.elementlabs.lmstudio$"
+    open-maximized true
+    open-focused true
+    open-on-workspace "apps-bg"
+}
+
 
 
 // middle workspace (default)
