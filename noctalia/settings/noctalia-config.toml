@@ -1,5 +1,3 @@
-config_version = 13
-
 [audio]
 enable_sounds = true
 sound_volume = 0.99999997764825821
