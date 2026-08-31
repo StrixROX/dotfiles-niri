@@ -1,3 +1,5 @@
+config_version = 13
+
 [audio]
 enable_sounds = true
 sound_volume = 0.99999997764825821
@@ -16,7 +18,7 @@ order = [ "default" ]
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "gamemode", "w-engine-widget", "media", "audio_visualizer" ]
+    start = [ "launcher", "gamemode", "devmode", "w-engine-widget", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -95,12 +97,15 @@ enabled = true
 item_spacing = 8
 magnification_scale = 1.7500000111758709
 pinned = [
+    "kitty",
     "org.gnome.Nautilus",
     "microsoft-edge",
     "steam",
     "msedge-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
     "hermes",
-    "com.anthropic.Claude"
+    "com.anthropic.Claude",
+    "lm-studio",
+    "dev.zed.Zed"
 ]
 position = "right"
 reserve_space = false
@@ -340,16 +345,15 @@ wallpaper_scheme = "vibrant"
 
 [wallpaper]
 directory = "/home/strixrox/nc_data/Photos"
-enabled = false
 
     [wallpaper.default]
-    path = "/home/strixrox/nc_data/Photos/3f24c0848cfaba6e99a9192400159dd2.jpg"
+    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
 
     [wallpaper.last]
-    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
+    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
+    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
@@ -366,7 +370,7 @@ capsule = true
 capsule_padding = 8
 
 [widget.clock]
-format = "{:%-I:%M %p %a %d %b}"
+format = "{:%-I:%M %p  %a %d %b}"
 
     [widget.clock.actions]
     middle = "none"
@@ -375,6 +379,14 @@ format = "{:%-I:%M %p %a %d %b}"
 display = "text"
 enabled = false
 visualization = "none"
+
+[widget.devmode]
+glyph = "code"
+type = "custom_button"
+
+    [widget.devmode.actions]
+    left = "exec systemctl --user start devmode"
+    right = "exec systemctl --user stop devmode"
 
 [widget.gamemode]
 glyph = "bluetooth-device-gamepad"
