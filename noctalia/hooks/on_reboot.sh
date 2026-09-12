@@ -5,3 +5,6 @@
 #$SCRIPT_DIR/../../scripts/linux-wallpaperengine-controller.sh stop
 
 pkill linux-wallpaper
+if [[ "$?" == "1" ]]; then
+    exit 0
+fi
