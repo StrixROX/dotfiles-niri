@@ -1,4 +1,5 @@
 [audio]
+enable_overdrive = true
 enable_sounds = true
 sound_volume = 0.99999997764825821
 
@@ -8,15 +9,14 @@ order = [ "default" ]
     [bar.default]
     background_opacity = 0.79999998211860657
     center = [ "group:g3" ]
-    end = [ "tray", "clipboard", "group:g2", "group:g1", "notifications" ]
+    end = [ "tray", "screen-recorder", "clipboard", "group:g2", "group:g1", "notifications" ]
     font_weight = 400
-    layer = "overlay"
     margin_edge = 4
     margin_ends = 300
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "gamemode", "devmode", "w-engine-widget", "media", "audio_visualizer" ]
+    start = [ "launcher", "group:g4", "w-engine-widget", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -52,8 +52,21 @@ order = [ "default" ]
         opacity = 1.0
         padding = 12.0
 
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface"
+        foreground = "primary"
+        id = "g4"
+        members = [ "gamemode", "devmode" ]
+        opacity = 1.0
+        padding = 6.0
+
 [battery]
 warning_threshold = 20
+
+[calendar]
 
 [control_center]
 sidebar_section = "none"
@@ -139,16 +152,19 @@ pre_action_fade_seconds = 0
 auto_locate = true
 
 [lockscreen]
-wallpaper = "/home/strixrox/nc_data/Photos/wuwa2.jpeg"
+blur_intensity = 0.32999999262392521
+fingerprint = false
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
 widget_order = [
     "lockscreen-login-box@winit",
     "lockscreen-login-box@eDP-1",
     "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002"
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000004"
 ]
 
     [lockscreen_widgets.grid]
@@ -248,15 +264,57 @@ widget_order = [
         format = "{:%p}"
         shadow = false
 
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 144.0
+    box_width = 480.0
+    cx = 960.0
+    cy = 358.86328125
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background = false
+        center_text = true
+        clock_style = "digital"
+        font_family = "Orbitron"
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
+    box_height = 43.08203125
+    box_width = 124.3984375
+    cx = 1216.0
+    cy = 332.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+        background = false
+        center_text = true
+        clock_style = "digital"
+        font_family = "Orbitron"
+        format = "{:%p}"
+        shadow = false
+
 [nightlight]
 enabled = true
 temperature_night = 3500
 
 [notification]
+keep_dismissed_in_history = false
 position = "bottom_right"
 
 [plugin_settings."noctalia/notes"]
 notes_dir = "~/"
+
+[plugin_settings."noctalia/screen_recorder"]
+audio_source = "none"
+directory = "~/videos/recordings"
 
 [plugin_settings."tadomika_ari/w-engine"]
 grid_columns = 3
@@ -278,6 +336,7 @@ enabled = [ "tadomika_ari/w-engine" ]
 [shell]
 font_family = "Space Grotesk"
 polkit_agent = true
+screen_time_enabled = true
 settings_show_advanced = false
 time_format = "{:%-I:%M %p}"
 
@@ -320,6 +379,7 @@ time_format = "{:%-I:%M %p}"
     action = "reboot"
     countdown_seconds = 0.0
     enabled = true
+    glyph = "reboot"
     shortcut = "4"
     variant = "default"
 
@@ -327,6 +387,7 @@ time_format = "{:%-I:%M %p}"
     action = "shutdown"
     countdown_seconds = 0.0
     enabled = true
+    glyph = "shutdown"
     shortcut = "5"
     variant = "destructive"
 
@@ -343,15 +404,17 @@ wallpaper_scheme = "vibrant"
 
 [wallpaper]
 directory = "/home/strixrox/nc_data/Photos"
+enabled = false
+transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
+    path = "/home/strixrox/nc_data/Photos/Yugachakra B.jpg"
 
     [wallpaper.last]
-    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
+    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/strixrox/nc_data/Photos/Yugachakra A.jpg"
+    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
@@ -364,7 +427,6 @@ tappy_mode = true
 type = "noctalia/bongocat:cat"
 
 [widget.clipboard]
-capsule = true
 capsule_padding = 8
 
 [widget.clock]
@@ -410,6 +472,14 @@ display = "text"
 enabled = false
 stat = "ram_pct"
 visualization = "none"
+
+[widget.screen-recorder]
+glyph = "video"
+type = "custom_button"
+
+    [widget.screen-recorder.actions]
+    left = "exec notify-send \"gpu-screen-recorder\" \"Recording started\" && gpu-screen-recorder -fallback-cpu-encoding yes -w eDP-1 -o ~/videos/recordings/latest.mp4"
+    right = "exec pkill -SIGINT -f \"^gpu-screen-recorder\" && notify-send \"gpu-screen-recorder\" \"Recording saved\""
 
 [widget.temp]
 display = "text"
