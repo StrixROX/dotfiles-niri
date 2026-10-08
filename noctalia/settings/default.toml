@@ -4,19 +4,19 @@ enable_sounds = true
 sound_volume = 0.99999997764825821
 
 [bar]
-order = [ "default" ]
+order = [ "default", "tray" ]
 
     [bar.default]
     background_opacity = 0.79999998211860657
     center = [ "group:g3" ]
-    end = [ "tray", "screen-recorder", "clipboard", "group:g2", "group:g1", "notifications" ]
+    end = [ "clipboard", "group:g2", "group:g1", "notifications" ]
     font_weight = 400
     margin_edge = 4
     margin_ends = 300
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "group:g4", "w-engine-widget", "media", "audio_visualizer" ]
+    start = [ "launcher", "w-engine-widget", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -25,6 +25,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g1"
@@ -35,6 +36,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g2"
@@ -45,6 +47,7 @@ order = [ "default" ]
         [[bar.default.capsule_group]]
         accordion = false
         accordion_direction = "end"
+        border_width = 1.0
         enabled = true
         fill = "surface_variant"
         id = "g3"
@@ -52,16 +55,18 @@ order = [ "default" ]
         opacity = 1.0
         padding = 12.0
 
-        [[bar.default.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        enabled = true
-        fill = "surface"
-        foreground = "primary"
-        id = "g4"
-        members = [ "gamemode", "devmode" ]
-        opacity = 1.0
-        padding = 6.0
+    [bar.tray]
+    center = [ "tray" ]
+    enabled = true
+    end = []
+    margin_ends = 515
+    position = "left"
+    reserve_space = false
+    smart_auto_hide = true
+    start = []
+
+        [bar.tray.dead_zone.actions]
+        right = "none"
 
 [battery]
 warning_threshold = 20
@@ -114,9 +119,7 @@ pinned = [
     "steam",
     "msedge-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
     "hermes",
-    "com.anthropic.Claude",
-    "lm-studio",
-    "dev.zed.Zed"
+    "com.shellyorg.shelly"
 ]
 position = "right"
 reserve_space = false
@@ -265,10 +268,10 @@ widget_order = [
         shadow = false
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-    box_height = 144.0
-    box_width = 480.0
+    box_height = 192.0
+    box_width = 384.0
     cx = 960.0
-    cy = 358.86328125
+    cy = 380.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -277,27 +280,29 @@ widget_order = [
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
         background = false
-        center_text = true
+        center_text = false
         clock_style = "digital"
-        font_family = "Orbitron"
+        font_family = "Space Grotesk"
+        format = "{:%I:%M}"
         shadow = false
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
-    box_height = 43.08203125
-    box_width = 124.3984375
-    cx = 1216.0
-    cy = 332.0
+    box_height = 48.0
+    box_width = 80.0
+    cx = 1160.0
+    cy = 348.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
-    rotation = 0.0
+    rotation = -0.0
     type = "clock"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
         background = false
         center_text = true
         clock_style = "digital"
-        font_family = "Orbitron"
+        color = "on_surface"
+        font_family = "Space Grotesk"
         format = "{:%p}"
         shadow = false
 
@@ -334,6 +339,7 @@ enabled = [ "tadomika_ari/w-engine" ]
     name = "community"
 
 [shell]
+avatar_path = "/home/strixrox/nc_data/Photos/changli_8.jpg"
 font_family = "Space Grotesk"
 polkit_agent = true
 screen_time_enabled = true
@@ -440,21 +446,6 @@ display = "text"
 enabled = false
 visualization = "none"
 
-[widget.devmode]
-glyph = "code"
-type = "custom_button"
-
-    [widget.devmode.actions]
-    left = "exec systemctl --user start devmode"
-    right = "exec systemctl --user stop devmode"
-
-[widget.gamemode]
-glyph = "bluetooth-device-gamepad"
-type = "custom_button"
-
-    [widget.gamemode.actions]
-    left = "exec pkexec systemctl start gamemode.service"
-
 [widget.launcher]
 glyph = "apps"
 
@@ -473,24 +464,16 @@ enabled = false
 stat = "ram_pct"
 visualization = "none"
 
-[widget.screen-recorder]
-glyph = "video"
-type = "custom_button"
-
-    [widget.screen-recorder.actions]
-    left = "exec notify-send \"gpu-screen-recorder\" \"Recording started\" && gpu-screen-recorder -fallback-cpu-encoding yes -w eDP-1 -o ~/videos/recordings/latest.mp4"
-    right = "exec pkill -SIGINT -f \"^gpu-screen-recorder\" && notify-send \"gpu-screen-recorder\" \"Recording saved\""
-
 [widget.temp]
 display = "text"
 glyph = "temperature"
 visualization = "none"
 
 [widget.tray]
-capsule = true
 capsule_padding = 12.0
+detached_panel = true
 drawer = true
-enabled = false
+drawer_columns = 4
 
 [widget.volume]
 show_label = false
