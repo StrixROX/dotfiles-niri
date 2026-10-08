@@ -15,5 +15,5 @@ environment {
 }
 
 debug {
-    render-drm-device "/dev/dri/renderD129" // the integrated GPU
+    render-drm-device "/dev/dri/renderD128" // the integrated GPU
 }
