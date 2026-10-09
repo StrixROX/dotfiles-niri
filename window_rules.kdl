@@ -2,6 +2,8 @@
 window-rule {
     match app-id="^kitty$"
     match app-id="Nautilus"
+    match app-id="shelly$"
+    match app-id="^GParted$"
     open-floating true
     default-column-width { proportion 0.7; }
     default-window-height { proportion 0.66; }
