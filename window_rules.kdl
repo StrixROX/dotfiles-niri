@@ -42,6 +42,8 @@ window-rule {
 
 window-rule {
     match app-id="^microsoft-edge$"
+    match app-id="^Mullvad Browser$"
+    match app-id="^chromium$"
     open-maximized true
 }
 
