@@ -44,7 +44,12 @@ window-rule {
     match app-id="^microsoft-edge$"
     match app-id="^Mullvad Browser$"
     match app-id="^chromium$"
+
     open-maximized true
+
+    popups {
+        opacity 1.0
+    }
 }
 
 window-rule {
