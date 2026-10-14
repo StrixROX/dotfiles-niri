@@ -137,7 +137,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="^Hermes$"
+    match app-id=".hermes$" title="Hermes"
     open-maximized true
     open-focused true
     open-on-workspace "apps-bg"
