@@ -2,6 +2,7 @@ binds {
     // Core Noctalia binds
     Mod+Space hotkey-overlay-title="Open app launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S hotkey-overlay-title="Open control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+A hotkey-overlay-title="Open system tray panel" { spawn-sh "noctalia msg panel-toggle tray-drawer"; }
     Mod+Comma hotkey-overlay-title="Open settings" { spawn-sh "noctalia msg settings-toggle"; }
 
     Mod+grave hotkey-overlay-title="Open clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
