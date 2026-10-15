@@ -64,6 +64,7 @@ order = [ "default", "tray" ]
     reserve_space = false
     smart_auto_hide = true
     start = []
+    widget_spacing = 24
 
         [bar.tray.dead_zone.actions]
         right = "none"
@@ -115,11 +116,12 @@ magnification_scale = 1.7500000111758709
 pinned = [
     "kitty",
     "org.gnome.Nautilus",
-    "microsoft-edge",
+    "mullvad-browser",
     "steam",
-    "msedge-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
-    "hermes",
-    "com.shellyorg.shelly"
+    "chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
+    "com.nousresearch.hermes",
+    "com.shellyorg.shelly",
+    "chromium"
 ]
 position = "right"
 reserve_space = false
@@ -153,6 +155,9 @@ pre_action_fade_seconds = 0
 
 [location]
 auto_locate = true
+custom_schedule = true
+sunrise = "08:00"
+sunset = "20:00"
 
 [lockscreen]
 blur_intensity = 0.32999999262392521
