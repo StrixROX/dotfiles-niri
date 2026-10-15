@@ -1,4 +1,8 @@
-spawn-sh-at-startup "sleep 3 && gtk-launch nextcloud"
+// spawn-sh-at-startup "sleep 3 && gtk-launch nextcloud"
 
 spawn-sh-at-startup "sleep 3 && gtk-launch org.keepassxc.KeePassXC.desktop"
+
+spawn-sh-at-startup "sleep 3 && gtk-launch proton.vpn.app.gtk"
+
+spawn-sh-at-startup "sleep 3 && gtk-launch steam"
 
