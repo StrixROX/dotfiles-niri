@@ -9,14 +9,14 @@ order = [ "default", "tray" ]
     [bar.default]
     background_opacity = 0.79999998211860657
     center = [ "group:g3" ]
-    end = [ "clipboard", "group:g2", "group:g1", "notifications" ]
+    end = [ "asus_fan", "clipboard", "group:g2", "group:g1", "notifications" ]
     font_weight = 400
     margin_edge = 4
     margin_ends = 300
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "w-engine-widget", "media", "audio_visualizer" ]
+    start = [ "launcher", "w-engine-widget", "widget", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -331,7 +331,7 @@ grid_columns = 3
 w-engine-panel_placement = "attached"
 
 [plugins]
-enabled = [ "tadomika_ari/w-engine" ]
+enabled = [ "tadomika_ari/w-engine", "kv7499/asus-fan", "strixrox/doh-observer" ]
 
     [[plugins.source]]
     kind = "git"
@@ -342,6 +342,11 @@ enabled = [ "tadomika_ari/w-engine" ]
     kind = "git"
     location = "https://github.com/noctalia-dev/community-plugins"
     name = "community"
+
+    [[plugins.source]]
+    kind = "path"
+    location = "~/.config/niri/myconfigs/noctalia/plugins"
+    name = "myplugins"
 
 [shell]
 avatar_path = "/home/strixrox/nc_data/Photos/changli_8.jpg"
@@ -380,7 +385,7 @@ time_format = "{:%-I:%M %p}"
     variant = "default"
 
     [[shell.session.actions]]
-    action = "suspend"
+    action = "lock_and_suspend"
     countdown_seconds = 0.0
     enabled = true
     shortcut = "3"
@@ -426,6 +431,9 @@ transition_on_startup = true
 
     [wallpaper.monitors.eDP-1]
     path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
+
+[widget.asus_fan]
+type = "kv7499/asus-fan:asus_fan"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
@@ -485,3 +493,6 @@ show_label = false
 
 [widget.w-engine-widget]
 type = "tadomika_ari/w-engine:w-engine-widget"
+
+[widget.widget]
+type = "strixrox/doh-observer:widget"
