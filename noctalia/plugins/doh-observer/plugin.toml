@@ -1,0 +1,25 @@
+id = "strixrox/doh-observer"
+name = "doh-client Service Observer"
+version = "1.0.0"
+plugin_api = 5
+author = "strix_rox"
+license = "GPL 3.0"
+icon = "network"
+description = "Observer for doh-client.service"
+dependencies = []
+tags = ["system"]
+
+[[setting]]
+key = "poll_interval_ms"
+type = "int"
+default = 5000
+min = 500
+max = 10000
+step = 250
+label_key = "settings.poll_interval_ms.label"
+description_key = "settings.poll_interval_ms.description"
+
+[[widget]]
+id = "widget"
+entry = "widget.luau"
+

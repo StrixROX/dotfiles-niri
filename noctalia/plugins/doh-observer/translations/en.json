@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "poll_interval_ms": {
+      "description": "How often to read service status",
+      "label": "Polling Interval (ms)"
+    }
+  }
+}
