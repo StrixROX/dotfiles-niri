@@ -4,6 +4,7 @@ window-rule {
     match app-id="Nautilus"
     match app-id="shelly$"
     match app-id="^GParted$"
+    match app-id="^org.gnome.DiskUtility$"
     open-floating true
     default-column-width { proportion 0.7; }
     default-window-height { proportion 0.66; }
@@ -119,20 +120,10 @@ window-rule {
 // top workspace (apps-bg)
 window-rule {
     match title="WhatsApp" // web app
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-bg"
-}
-
-window-rule {
     match title="YouTube Music" // web app
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-bg"
-}
-
-window-rule {
     match title="Gmail" // web app
+    match title="TutaMail" // web app
+
     open-maximized true
     open-focused true
     open-on-workspace "apps-bg"
