@@ -9,14 +9,14 @@ order = [ "default", "tray" ]
     [bar.default]
     background_opacity = 0.79999998211860657
     center = [ "group:g3" ]
-    end = [ "asus_fan", "clipboard", "group:g2", "group:g1", "notifications" ]
+    end = [ "clipboard", "group:g2", "group:g1", "notifications" ]
     font_weight = 400
     margin_edge = 4
     margin_ends = 300
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "w-engine-widget", "widget", "media", "audio_visualizer" ]
+    start = [ "launcher", "w-engine-widget", "widget", "bar", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -27,7 +27,7 @@ order = [ "default", "tray" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g1"
         members = [ "network", "bluetooth", "volume", "battery" ]
         opacity = 1.0
@@ -38,7 +38,7 @@ order = [ "default", "tray" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g2"
         members = [ "temp", "cpu", "ram" ]
         opacity = 1.0
@@ -49,7 +49,7 @@ order = [ "default", "tray" ]
         accordion_direction = "end"
         border_width = 1.0
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g3"
         members = [ "clock" ]
         opacity = 1.0
@@ -162,6 +162,7 @@ sunset = "20:00"
 [lockscreen]
 blur_intensity = 0.32999999262392521
 fingerprint = false
+wallpaper = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
 
 [lockscreen_widgets]
 enabled = true
@@ -192,7 +193,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.45000000000000001
         background_radius = 12.0
         center_password_text = false
@@ -219,7 +220,7 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@winit".settings]
-        background_color = "surface_variant"
+        background_color = "surface_container"
         background_opacity = 0.88
         background_radius = 12.0
         center_password_text = false
@@ -331,7 +332,7 @@ grid_columns = 3
 w-engine-panel_placement = "attached"
 
 [plugins]
-enabled = [ "tadomika_ari/w-engine", "kv7499/asus-fan", "strixrox/doh-observer" ]
+enabled = [ "tadomika_ari/w-engine", "strixrox/doh-observer", "rylos/tailnet" ]
 
     [[plugins.source]]
     kind = "git"
@@ -420,24 +421,23 @@ wallpaper_scheme = "vibrant"
 
 [wallpaper]
 directory = "/home/strixrox/nc_data/Photos"
-enabled = false
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/strixrox/nc_data/Photos/Yugachakra B.jpg"
+    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
 
     [wallpaper.last]
-    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
+    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/strixrox/.local/share/Steam/steamapps/workshop/content/431960/3656343737/preview.jpg"
-
-[widget.asus_fan]
-type = "kv7499/asus-fan:asus_fan"
+    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
 mirrored = false
+
+[widget.bar]
+type = "rylos/tailnet:bar"
 
 [widget.cat]
 audio_spectrum = true
@@ -486,7 +486,7 @@ visualization = "none"
 capsule_padding = 12.0
 detached_panel = true
 drawer = true
-drawer_columns = 4
+drawer_columns = 5
 
 [widget.volume]
 show_label = false
