@@ -26,8 +26,11 @@ local LOADING_STATUS = "loading"
 local status = DEFAULT_STATUS
 
 local function render()
-  barWidget.setText(STATUS_MSG[status].text)
   barWidget.setGlyph(STATUS_MSG[status].glyph)
+  barWidget.setTooltip({
+    { key = "Service", value = SERVICE_NAME },
+    { key = "Status", value = STATUS_MSG[status].text },
+  })
 end
 
 local function checkServiceStatus()
