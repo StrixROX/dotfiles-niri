@@ -6,3 +6,5 @@ spawn-sh-at-startup "sleep 3 && gtk-launch proton.vpn.app.gtk"
 
 spawn-sh-at-startup "sleep 3 && gtk-launch steam"
 
+spawn-sh-at-startup "rclone rcd --rc-addr=http://127.0.0.1:5572 --rc-no-auth"
+
