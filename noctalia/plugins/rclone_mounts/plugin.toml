@@ -1,0 +1,75 @@
+# rclone mount manager — bar widget + tooltip + panel + headless service.
+#
+# The [[service]] polls the rclone rc HTTP API directly with noctalia.http
+# (no `rclone rc` subprocess) for mount/listmounts, vfs/stats,
+# operations/about, core/stats, core/transferred, and config/listremotes,
+# then publishes a "mounts" table (ordered exactly like mount/listmounts,
+# same order rclone_status.sh prints) and a "remotes" table of configured-
+# but-not-mounted remotes. The [[widget]] and [[panel]] are thin clients
+# that only read noctalia.state and never talk to rc directly.
+#
+# Encryption handling, cache-mode selection on mount, and unmount are
+# deliberately left out of this first pass — UI + live data first, per the
+# user's request. Mounting defaults to --vfs-cache-mode=writes (enum 2).
+
+id = "strixrox/rclone_mounts"
+name = "Rclone Mounts"
+version = "0.1.0"
+plugin_api = 9
+author = "strix_rox"
+license = "MIT"
+dependencies = ["rclone", "zenity or kdialog or yad (directory picker)"]
+tags = ["storage", "rclone", "mounts", "system"]
+icon = "server"
+description = "Bar widget, tooltip, and panel for rclone rc-managed VFS mounts."
+
+[[setting]]
+key = "rc_addr"
+type = "string"
+label_key = "settings.rc_addr.label"
+description_key = "settings.rc_addr.description"
+default = "127.0.0.1:5572"
+
+[[setting]]
+key = "rc_user"
+type = "string"
+label_key = "settings.rc_user.label"
+description_key = "settings.rc_user.description"
+default = ""
+
+[[setting]]
+key = "rc_pass"
+type = "string"
+label_key = "settings.rc_pass.label"
+description_key = "settings.rc_pass.description"
+default = ""
+
+[[setting]]
+key = "poll_seconds"
+type = "int"
+label_key = "settings.poll_seconds.label"
+description_key = "settings.poll_seconds.description"
+default = 3
+min = 1
+max = 60
+
+# Headless background poller. Owns every rc/API call and the "command"
+# channel the widget/panel use to request a mount.
+[[service]]
+id = "service"
+entry = "service.luau"
+
+# Bar tile: server glyph + mounted-remote count, with a details tooltip.
+[[widget]]
+id = "widget"
+entry = "widget.luau"
+
+# Opened by the widget's onClick (noctalia.togglePanel). Fixed size with an
+# internal scroll area — see panel.luau for what stays pinned vs. scrolls.
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 480
+height = 600
+placement = "floating"
+position = "center"
