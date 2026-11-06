@@ -16,7 +16,7 @@ order = [ "default", "tray" ]
     radius = 16
     reserve_space = false
     smart_auto_hide = true
-    start = [ "launcher", "w-engine-widget", "widget", "bar", "media", "audio_visualizer" ]
+    start = [ "launcher", "w-engine-widget", "media", "audio_visualizer" ]
     widget_spacing = 8
 
         [bar.default.actions]
@@ -56,15 +56,15 @@ order = [ "default", "tray" ]
         padding = 12.0
 
     [bar.tray]
-    center = [ "tray" ]
+    center = [ "widget_3", "bar_2", "widget_4", "tray" ]
     enabled = true
     end = []
-    margin_ends = 515
+    margin_ends = 465
     position = "left"
     reserve_space = false
     smart_auto_hide = true
     start = []
-    widget_spacing = 24
+    widget_spacing = 16
 
         [bar.tray.dead_zone.actions]
         right = "none"
@@ -120,8 +120,8 @@ pinned = [
     "steam",
     "chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
     "com.nousresearch.hermes",
-    "com.shellyorg.shelly",
-    "chromium"
+    "chromium",
+    "com.shellyorg.shelly"
 ]
 position = "right"
 reserve_space = false
@@ -327,12 +327,21 @@ notes_dir = "~/"
 audio_source = "none"
 directory = "~/videos/recordings"
 
+[plugin_settings."rylos/tailnet"]
+panel_placement = "floating"
+
+[plugin_settings."strixrox/rclone_mounts"]
+default_cache_max_size_gib = 20
+default_cache_mode = "full"
+panel_open_near_click = true
+panel_position = "auto"
+
 [plugin_settings."tadomika_ari/w-engine"]
 grid_columns = 3
 w-engine-panel_placement = "attached"
 
 [plugins]
-enabled = [ "tadomika_ari/w-engine", "strixrox/doh-observer", "rylos/tailnet" ]
+enabled = [ "tadomika_ari/w-engine", "strixrox/doh-observer", "rylos/tailnet", "strixrox/rclone_mounts" ]
 
     [[plugins.source]]
     kind = "git"
@@ -436,7 +445,8 @@ transition_on_startup = true
 color_2 = "secondary"
 mirrored = false
 
-[widget.bar]
+[widget.bar_2]
+show_count = false
 type = "rylos/tailnet:bar"
 
 [widget.cat]
@@ -494,5 +504,8 @@ show_label = false
 [widget.w-engine-widget]
 type = "tadomika_ari/w-engine:w-engine-widget"
 
-[widget.widget]
+[widget.widget_3]
 type = "strixrox/doh-observer:widget"
+
+[widget.widget_4]
+type = "strixrox/rclone_mounts:widget"
