@@ -53,6 +53,40 @@ default = 3
 min = 1
 max = 60
 
+# Seeds the panel's Add-mount form; the user can still override per-mount
+# before clicking Add. Values/order mirror panel.luau's CACHE_MODE_LABELS.
+[[setting]]
+key = "default_cache_mode"
+type = "select"
+label_key = "settings.default_cache_mode.label"
+description_key = "settings.default_cache_mode.description"
+default = "off"
+
+  [[setting.options]]
+  value = "full"
+  label_key = "settings.default_cache_mode.options.full"
+
+  [[setting.options]]
+  value = "write"
+  label_key = "settings.default_cache_mode.options.write"
+
+  [[setting.options]]
+  value = "minimal"
+  label_key = "settings.default_cache_mode.options.minimal"
+
+  [[setting.options]]
+  value = "off"
+  label_key = "settings.default_cache_mode.options.off"
+
+[[setting]]
+key = "default_cache_max_size_gib"
+type = "int"
+label_key = "settings.default_cache_max_size_gib.label"
+description_key = "settings.default_cache_max_size_gib.description"
+default = 0
+min = 0
+max = 4096
+
 # Headless background poller. Owns every rc/API call and the "command"
 # channel the widget/panel use to request a mount.
 [[service]]

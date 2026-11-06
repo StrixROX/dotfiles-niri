@@ -8,6 +8,7 @@
 
 local mounts = {}
 local rcUp = false
+local vertical = barWidget.isVertical()
 
 local function applyTooltip()
     if not rcUp then
@@ -29,12 +30,18 @@ end
 
 local function applyDisplay()
     barWidget.setGlyph("server")
+    local greyedOut = (not rcUp) or (#mounts == 0)
     if not rcUp then
-        barWidget.setText("–")
-        barWidget.setGlyphColor("on_surface_variant")
+        barWidget.setText((not vertical) and "" or "–")
     else
-        barWidget.setText(tostring(#mounts))
+        barWidget.setText(vertical and "" or tostring(#mounts))
+    end
+    if greyedOut then
+        barWidget.setGlyphColor("on_surface_variant")
+        barWidget.setColor("on_surface_variant")
+    else
         barWidget.setGlyphColor("on_surface")
+        barWidget.setColor("on_surface")
     end
     applyTooltip()
 end

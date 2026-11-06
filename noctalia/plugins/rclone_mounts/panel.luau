@@ -17,13 +17,35 @@ local remotes = {}
 local rcUp = false
 local selectedTabIndex = 1
 local selectedRemoteIndex = 0
-local selectedCacheModeIndex = 3 -- default "Off" (enum 0)
-local cacheMaxSizeText = "" -- max cache size in GiB, blank = unbounded
 local picking = false
 local confirmUnmountFor = nil -- mountpoint currently showing the unmount confirmation (unique key; the same remote can in principle be mounted twice, at different paths)
-
 local CACHE_MODE_LABELS = { "Full", "Write", "Minimal", "Off" }
 local CACHE_MODE_VALUES = { 3, 2, 1, 0 } -- rclone's vfs CacheMode enum, same order as CACHE_MODE_LABELS
+local CACHE_MODE_SETTING_TO_VALUE = { full = 3, write = 2, minimal = 1, off = 0 }
+
+local function defaultCacheModeIndex()
+    local value = CACHE_MODE_SETTING_TO_VALUE[noctalia.getConfig("default_cache_mode")]
+    if value == nil then
+        return 3 -- "Off", 0-based (matches ui.select/onChange convention below)
+    end
+    for i, v in ipairs(CACHE_MODE_VALUES) do
+        if v == value then
+            return i - 1 -- CACHE_MODE_VALUES is 1-based (Lua array); selectedIndex is 0-based
+        end
+    end
+    return 3
+end
+
+local function defaultCacheMaxSizeText()
+    local gib = noctalia.getConfig("default_cache_max_size_gib")
+    if type(gib) == "number" and gib > 0 then
+        return tostring(gib)
+    end
+    return ""
+end
+
+local selectedCacheModeIndex = defaultCacheModeIndex()
+local cacheMaxSizeText = defaultCacheMaxSizeText() -- max cache size in GiB, blank = unbounded
 
 local function tr(key, subst)
     return noctalia.tr(key, subst)
