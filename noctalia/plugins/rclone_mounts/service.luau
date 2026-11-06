@@ -165,6 +165,7 @@ local function applyVfsQueue(entry, done)
         if type(decoded) == "table" and type(decoded.queue) == "table" then
             for _, q in ipairs(decoded.queue) do
                 table.insert(items, {
+                    id = q.id or 0,
                     name = q.name or "",
                     size = q.size or 0,
                     uploading = q.uploading == true,
@@ -172,6 +173,10 @@ local function applyVfsQueue(entry, done)
                 })
             end
         end
+        -- vfs/queue has no start-time field; "id" is assigned in queue
+        -- order, so sorting by it descending is the closest available
+        -- proxy for "most recently started/queued first".
+        table.sort(items, function(a, b) return a.id > b.id end)
         entry.queueItems = items
         done()
     end)
@@ -209,9 +214,19 @@ local function applyGlobalTransfers(statsDecoded, transferredDecoded)
     local transferred = {}
     if type(transferredDecoded) == "table" and type(transferredDecoded.transferred) == "table" then
         for _, t in ipairs(transferredDecoded.transferred) do
-            table.insert(transferred, { name = t.name or "", error = t.error or "" })
+            table.insert(transferred, {
+                name = t.name or "",
+                error = t.error or "",
+                startedAt = t.started_at or t.completed_at or "",
+            })
         end
     end
+    -- started_at/completed_at are ISO8601 strings ("2026-11-06T23:07:21.77...
+    -- +05:30"), not a numeric timestamp - lexicographic string comparison
+    -- still sorts them chronologically as long as the offset format is
+    -- consistent (it is, within one rclone process), so plain string
+    -- comparison is enough; no need to parse them.
+    table.sort(transferred, function(a, b) return a.startedAt > b.startedAt end)
 
     -- core/stats' "transferring" list carries the live percentage but is
     -- global (not per-VFS); key it by name so each mount's vfs/queue items
