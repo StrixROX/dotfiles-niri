@@ -85,14 +85,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Nextcloud"
-    open-floating true
-    default-column-width { proportion 0.33; }
-    default-window-height { proportion 0.67; }
-    default-floating-position x=8 y=8 relative-to="top-right"
-}
-
-window-rule {
     match title="Picture in picture" // browser PiPs
 
     open-floating true
@@ -119,32 +111,17 @@ window-rule {
 
 // top workspace (apps-bg)
 window-rule {
-    match title="WhatsApp" // web app
-    match title="YouTube Music" // web app
-    match title="Gmail" // web app
-    match title="TutaMail" // web app
+    // web apps
+    match title="WhatsApp"
+    match title="YouTube Music"
+    match title="Gmail"
+    match title="TutaMail"
 
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-bg"
-}
-
-window-rule {
+    // apps
     match app-id=".hermes$" title="Hermes"
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-bg"
-}
-
-window-rule {
     match app-id="^com.anthropic.Claude$"
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-bg"
-}
-
-window-rule {
     match app-id="^ai.elementlabs.lmstudio$"
+
     open-maximized true
     open-focused true
     open-on-workspace "apps-bg"
@@ -153,23 +130,15 @@ window-rule {
 
 
 // middle workspace (default)
-window-rule {
-    match app-id="^microsoft-edge$"
-    open-maximized true
-    open-on-workspace "default"
-}
-
+//
+// --- N/A ---
+//
 
 
 // bottom workspace (apps-other)
 window-rule {
-    match app-id="^microsoft-edge$" title="InPrivate"
-    open-focused true
-    open-on-workspace "apps-other"
-}
-
-window-rule {
     match title="Figma" // web app
+
     open-maximized true
     open-focused true
     open-on-workspace "apps-other"
@@ -178,15 +147,14 @@ window-rule {
 }
 
 window-rule {
-    match title="onshape" // web app
+    // web app
+    match title="onshape"
+
+    // app
+    match app-id="^BambuStudio$"
+
     open-maximized true
     open-focused true
     open-on-workspace "apps-other"
 }
 
-window-rule {
-    match app-id="^BambuStudio$"
-    open-maximized true
-    open-focused true
-    open-on-workspace "apps-other"
-}
