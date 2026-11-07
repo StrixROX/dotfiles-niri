@@ -6,7 +6,7 @@ author = "strix_rox"
 license = "GPL 3.0"
 icon = "network"
 description = "Observer for doh-client.service"
-dependencies = []
+dependencies = ["dns-over-https"]
 tags = ["system"]
 
 [[setting]]
