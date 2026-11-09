@@ -121,6 +121,7 @@ window-rule {
     match app-id=".hermes$" title="Hermes"
     match app-id="^com.anthropic.Claude$"
     match app-id="^ai.elementlabs.lmstudio$"
+    match app-id="sidra"
 
     open-maximized true
     open-focused true
