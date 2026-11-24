@@ -119,6 +119,7 @@ pinned = [
     "mullvad-browser",
     "steam",
     "chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default",
+    "chrome-eokcfennnemjedpjamkoppnhpbalennc-Default",
     "com.nousresearch.hermes",
     "chromium",
     "com.shellyorg.shelly"
@@ -341,7 +342,7 @@ grid_columns = 3
 w-engine-panel_placement = "attached"
 
 [plugins]
-enabled = [ "tadomika_ari/w-engine", "strixrox/doh-observer", "rylos/tailnet", "strixrox/rclone_mounts" ]
+enabled = [ "tadomika_ari/w-engine", "rylos/tailnet", "strixrox/doh-observer", "strixrox/rclone_mounts" ]
 
     [[plugins.source]]
     kind = "git"
@@ -433,13 +434,13 @@ directory = "/home/strixrox/nc_data/Photos"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
+    path = "/home/strixrox/nc_data/Photos/pixiewall-gcrzo0-3840x2160.jpg"
 
     [wallpaper.last]
-    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
+    path = "/home/strixrox/nc_data/Photos/pixiewall-gcrzo0-3840x2160.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/strixrox/nc_data/Photos/camellyaaa.jpeg"
+    path = "/home/strixrox/nc_data/Photos/pixiewall-gcrzo0-3840x2160.jpg"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
