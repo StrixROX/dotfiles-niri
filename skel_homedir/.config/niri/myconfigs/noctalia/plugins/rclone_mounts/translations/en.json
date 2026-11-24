@@ -28,11 +28,13 @@
   "panel.rc_down": "rc server unreachable - check it's running with --rc",
   "panel.mount_point": "Mount Point",
   "panel.unmount": "Unmount",
+  "panel.refresh_cache": "Refresh Cache",
   "panel.unmount_confirm_message": "Transfers are in progress for this remote. Unmounting now may interrupt them, but rclone resumes pending uploads from its VFS cache on the next mount. Unmount anyway?",
   "panel.cancel": "Cancel",
   "panel.unmount_anyway": "Unmount Anyway",
   "panel.cache_mode": "Cache Mode",
   "panel.cache_dir": "Cache Dir",
+  "panel.cache_off": "Caching is off for this mount",
   "panel.used": "Used",
   "panel.free": "Free",
   "panel.total": "Total",
@@ -56,5 +58,9 @@
   "notify.mount_failed": "Mount failed: {error}",
   "notify.unmount_success": "Unmounted {remote} from {mountpoint}",
   "notify.unmount_failed": "Unmount failed: {error}",
+  "notify.refresh_title": "Rclone Refresh",
+  "notify.refresh_success": "Refreshed {remote} cache",
+  "notify.refresh_failed": "Refresh failed: {error}",
+  "notify.refresh_unavailable": "Cache info not ready yet - try again shortly",
   "notify.unknown_error": "unknown error"
 }

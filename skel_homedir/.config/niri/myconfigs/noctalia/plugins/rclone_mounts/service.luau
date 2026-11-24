@@ -111,45 +111,63 @@ end
 -- ── vfs/stats (per mount, every tick) ───────────────────────────────────
 
 local function applyVfsStats2(entry, decoded)
-    local disk = decoded.diskCache
     local opt = decoded.opt or {}
+    local mode = opt.CacheMode
+    entry.cacheMode = if type(mode) == "number" then (CACHE_MODE_NAMES[mode] or "unknown") else "unknown"
+    entry.cacheAvailable = true
+
+    -- diskCache is only present when --vfs-cache-mode is above "off" -
+    -- its absence here is normal, not a failure, so don't treat it as one.
+    local disk = decoded.diskCache
+    if disk == nil then
+        entry.cacheUsedBytes = 0
+        entry.cachePath = ""
+        entry.cacheMaxBytes = -1
+        entry.uploadsQueued = 0
+        entry.uploadsInProgress = 0
+        entry.erroredFiles = 0
+        return
+    end
+
     entry.cacheUsedBytes = disk.bytesUsed or 0
     entry.cachePath = disk.path or ""
     entry.cacheMaxBytes = if opt.CacheMaxSize ~= nil and opt.CacheMaxSize ~= -1 then opt.CacheMaxSize else -1
     entry.uploadsQueued = disk.uploadsQueued or 0
     entry.uploadsInProgress = disk.uploadsInProgress or 0
     entry.erroredFiles = disk.erroredFiles or 0
-    local mode = opt.CacheMode
-    entry.cacheMode = if type(mode) == "number" then (CACHE_MODE_NAMES[mode] or "unknown") else "unknown"
-    entry.cacheAvailable = true
 end
 
 local function applyVfsStats(entry, vfsNames, done)
     rcCall("vfs/stats", { fs = entry.fs }, function(decoded)
-        if type(decoded) ~= "table" or decoded.diskCache == nil then
-            -- listmounts' Fs string didn't match the registered vfs name
-            -- verbatim; fall back to a prefix match against vfs/list, same
-            -- cross-check rclone_status.sh does.
-            local alt = nil
-            for _, name in ipairs(vfsNames) do
-                if name:sub(1, #entry.remote + 1) == entry.remote .. ":" then
-                    alt = name
-                    break
-                end
-            end
-            if alt ~= nil then
-                rcCall("vfs/stats", { fs = alt }, function(decoded2)
-                    if type(decoded2) == "table" and decoded2.diskCache ~= nil then
-                        applyVfsStats2(entry, decoded2)
-                    end
-                    done()
-                end)
-                return
-            end
+        -- "opt" (and "fs") are always present for a resolved VFS regardless
+        -- of cache mode; "diskCache" is NOT (see applyVfsStats2), so it is
+        -- not a safe signal that the fs name actually matched.
+        if type(decoded) == "table" and decoded.opt ~= nil then
+            entry.vfsName = entry.fs
+            applyVfsStats2(entry, decoded)
             done()
             return
         end
-        applyVfsStats2(entry, decoded)
+        -- listmounts' Fs string didn't match the registered vfs name
+        -- verbatim; fall back to a prefix match against vfs/list, same
+        -- cross-check rclone_status.sh does.
+        local alt = nil
+        for _, name in ipairs(vfsNames) do
+            if name:sub(1, #entry.remote + 1) == entry.remote .. ":" then
+                alt = name
+                break
+            end
+        end
+        if alt ~= nil then
+            rcCall("vfs/stats", { fs = alt }, function(decoded2)
+                if type(decoded2) == "table" and decoded2.opt ~= nil then
+                    entry.vfsName = alt
+                    applyVfsStats2(entry, decoded2)
+                end
+                done()
+            end)
+            return
+        end
         done()
     end)
 end
@@ -158,9 +176,21 @@ end
 -- This is the actual per-VFS upload queue - each item carries its own
 -- `uploading` flag, which is what makes "transfers in progress" genuinely
 -- scoped to this mount instead of the whole rc server.
+--
+-- Only ever called with entry.vfsName - the name vfs/stats just confirmed
+-- is actually registered - never with the raw, unconfirmed entry.fs.
+-- Calling an rc vfs/* endpoint with an fs string that isn't an exact match
+-- for an already-active VFS makes rclone silently spin up a brand new,
+-- unaddressable orphan VFS instance (confirmed by testing); that's what
+-- piled up "lepusx_remote:[0]", "[1]", ... during earlier development.
 
 local function applyVfsQueue(entry, done)
-    rcCall("vfs/queue", { fs = entry.fs }, function(decoded)
+    if entry.vfsName == nil then
+        entry.queueItems = {}
+        done()
+        return
+    end
+    rcCall("vfs/queue", { fs = entry.vfsName }, function(decoded)
         local items = {}
         if type(decoded) == "table" and type(decoded.queue) == "table" then
             for _, q in ipairs(decoded.queue) do
@@ -182,14 +212,12 @@ local function applyVfsQueue(entry, done)
     end)
 end
 
+-- vfs/stats resolves entry.vfsName; vfs/queue depends on that, so it runs
+-- sequentially after, not in parallel - see the orphan-VFS note above.
 local function applyMountData(entry, vfsNames, done)
-    local pending = 2
-    local function partDone()
-        pending -= 1
-        if pending <= 0 then done() end
-    end
-    applyVfsStats(entry, vfsNames, partDone)
-    applyVfsQueue(entry, partDone)
+    applyVfsStats(entry, vfsNames, function()
+        applyVfsQueue(entry, done)
+    end)
 end
 
 -- ── operations/about (per remote, only on slow ticks) ───────────────────
@@ -445,6 +473,42 @@ local function unmountRemote(remote, mountpoint)
     end)
 end
 
+-- ── refresh command (from the panel's "Refresh" button) ──────────────────
+-- vfs/refresh re-reads directories into the VFS's dir cache; recursive=true
+-- walks the whole tree. Per the user's request, called exactly as
+-- `rclone rc vfs/refresh recursive=true` - no "fs" param. That only works
+-- while exactly one VFS is active; with more than one, rclone itself
+-- rejects it with "more than one VFS active" rather than guessing, which
+-- we just surface as a normal failure notification. recursive must be
+-- sent as the STRING "true", not a JSON boolean - rc's generic param
+-- decoder for this one rejects `"recursive": true` with
+-- `value must be string "recursive"=true` (confirmed by testing).
+
+local function refreshMount(mountpoint)
+    local target = nil
+    for _, entry in ipairs(mounts) do
+        if entry.mountpoint == mountpoint then
+            target = entry
+            break
+        end
+    end
+    if target == nil then
+        noctalia.notifyError(noctalia.tr("notify.refresh_title"), noctalia.tr("notify.refresh_unavailable"))
+        return
+    end
+
+    log(`refreshing {target.remote}`)
+    rcCall("vfs/refresh", { recursive = "true" }, function(decoded, res)
+        if res ~= nil and res.ok and res.status < 400 then
+            noctalia.notify(noctalia.tr("notify.refresh_title"), noctalia.tr("notify.refresh_success", { remote = target.remote }))
+        else
+            local reason = if type(decoded) == "table" and decoded.error ~= nil then tostring(decoded.error) else noctalia.tr("notify.unknown_error")
+            log(`refresh failed for {target.remote}: {reason}`)
+            noctalia.notifyError(noctalia.tr("notify.refresh_title"), noctalia.tr("notify.refresh_failed", { error = reason }))
+        end
+    end)
+end
+
 -- ── lifecycle ─────────────────────────────────────────────────────────────
 
 local function applyPollInterval()
@@ -473,5 +537,7 @@ noctalia.state.watch("command", function(cmd)
         mountRemote(cmd.remote, cmd.mountpoint, cmd.cacheMode, cmd.cacheMaxSizeGiB)
     elseif cmd.action == "unmount" then
         unmountRemote(cmd.remote, cmd.mountpoint)
+    elseif cmd.action == "refresh" then
+        refreshMount(cmd.mountpoint)
     end
 end)

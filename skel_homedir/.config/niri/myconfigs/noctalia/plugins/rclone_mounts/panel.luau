@@ -113,13 +113,17 @@ end
 local function vfsCacheSection(m)
     local rows = {}
     if m.cacheAvailable then
-        if m.cacheMaxBytes ~= nil and m.cacheMaxBytes ~= -1 then
-            table.insert(rows, kv(tr("panel.used"), `{humanBytes(m.cacheUsedBytes)} / {humanBytes(m.cacheMaxBytes)} ({pct(m.cacheUsedBytes, m.cacheMaxBytes)})`))
+        if m.cacheMode == "off" then
+            table.insert(rows, ui.label({ text = tr("panel.cache_off"), color = "on_surface_variant" }))
         else
-            table.insert(rows, kv(tr("panel.used"), `{humanBytes(m.cacheUsedBytes)} ({tr("panel.max_unbounded")})`))
+            table.insert(rows, kv(tr("panel.cache_mode"), m.cacheMode))
+            if m.cacheMaxBytes ~= nil and m.cacheMaxBytes ~= -1 then
+                table.insert(rows, kv(tr("panel.used"), `{humanBytes(m.cacheUsedBytes)} / {humanBytes(m.cacheMaxBytes)} ({pct(m.cacheUsedBytes, m.cacheMaxBytes)})`))
+            else
+                table.insert(rows, kv(tr("panel.used"), `{humanBytes(m.cacheUsedBytes)} ({tr("panel.max_unbounded")})`))
+            end
+            table.insert(rows, kv(tr("panel.cache_dir"), if m.cachePath ~= "" then m.cachePath else "?"))
         end
-        table.insert(rows, kv(tr("panel.cache_mode"), m.cacheMode))
-        table.insert(rows, kv(tr("panel.cache_dir"), if m.cachePath ~= "" then m.cachePath else "?"))
     else
         table.insert(rows, ui.label({ text = tr("panel.cache_unavailable"), color = "on_surface_variant" }))
     end
@@ -215,15 +219,29 @@ local function unmountConfirmBanner(m)
     })
 end
 
+local function requestRefresh(m)
+    noctalia.state.set("command", { action = "refresh", mountpoint = m.mountpoint })
+end
+
 local function mountPointRow(m)
     return ui.column({ gap = 4, align = "stretch" }, {
         sectionHeading(tr("panel.mount_point")),
         ui.row({ gap = 8, align = "center", justify = "space_between" }, {
             ui.label({ text = m.mountpoint, color = "on_surface", flexGrow = 1 }),
             ui.button({
+                key = "refresh_button",
+                glyph = "refresh",
+                variant = "outline",
+                tooltip = tr("panel.refresh_cache"),
+                onClick = function()
+                    requestRefresh(m)
+                end,
+            }),
+            ui.button({
                 key = "unmount_button",
-                text = tr("panel.unmount"),
+                glyph = "player-eject",
                 variant = "destructive",
+                tooltip = tr("panel.unmount"),
                 onClick = function()
                     requestUnmount(m)
                 end,
