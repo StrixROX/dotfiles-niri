@@ -7,7 +7,7 @@ input {
     touchpad {
         tap
         natural-scroll
-        //dwt // disable when typing
+        dwt // disable when typing
     }
 
     mouse {
