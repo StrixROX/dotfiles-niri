@@ -1,5 +1,12 @@
 // workspace-agnostic rules
 window-rule {
+    match app-id="^md.obsidian.Obsidian$"
+    open-floating true
+    default-column-width { proportion 0.9; }
+    default-window-height { proportion 0.89; }
+}
+
+window-rule {
     match app-id="^kitty$"
     match app-id="Nautilus"
     match app-id="shelly$"
