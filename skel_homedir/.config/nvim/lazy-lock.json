@@ -1,4 +1,4 @@
 {
-  "base16-nvim": { "branch": "master", "commit": "4b09047007a23f77db1de9818c693556445bbaab" },
+  "base16-nvim": { "branch": "master", "commit": "9c56a279357d39b8d2f07089d925ee9914572ba5" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" }
 }
